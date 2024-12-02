@@ -1,5 +1,6 @@
 package com.oocl.todo_list.service;
 
+import com.oocl.todo_list.exception.TodoItemNotFoundException;
 import com.oocl.todo_list.model.TodoItem;
 import com.oocl.todo_list.repository.TodoItemRepository;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,12 @@ public class TodoItemService {
 
     public TodoItem create(TodoItem todoItem) {
         return todoItemRepository.save(todoItem);
+    }
+
+    public TodoItem update(Integer id, TodoItem todoItem) {
+        TodoItem existingTodoItem = todoItemRepository.findById(id).orElseThrow(TodoItemNotFoundException::new);
+
+        existingTodoItem.update(todoItem);
+        return todoItemRepository.save(existingTodoItem);
     }
 }

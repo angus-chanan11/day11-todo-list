@@ -1,15 +1,17 @@
 package com.oocl.todo_list.service;
 
+import com.oocl.todo_list.exception.TodoItemNotFoundException;
 import com.oocl.todo_list.model.TodoItem;
 import com.oocl.todo_list.repository.TodoItemRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
 
 class TodoItemServiceTest {
 
@@ -41,5 +43,21 @@ class TodoItemServiceTest {
 
         //then
         assertEquals("some todo", savedTodo.getText());
+    }
+
+    @Test
+    void should_return_the_updated_todo_when_update_given_an_id_and_a_todo() {
+        //given
+        TodoItemRepository mockedTodoItemRepository = mock(TodoItemRepository.class);
+        TodoItem originalTodo = new TodoItem(1, "original", false);
+        TodoItem updatedTodo = new TodoItem("updated", true);
+        when(mockedTodoItemRepository.findById(1)).thenReturn(Optional.of(originalTodo));
+        when(mockedTodoItemRepository.save(any())).thenReturn(updatedTodo);
+        TodoItemService todoItemService = new TodoItemService(mockedTodoItemRepository);
+        //when
+        TodoItem savedTodo = todoItemService.update(originalTodo.getId(), updatedTodo);
+
+        //then
+        assertEquals("updated", savedTodo.getText());
     }
 }
