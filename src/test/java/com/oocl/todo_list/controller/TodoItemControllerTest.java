@@ -134,4 +134,28 @@ class TodoItemControllerTest {
         List<TodoItem> todoItems = todoItemRepository.findAll();
         assertThat(todoItems).hasSize(2);
     }
+
+    @Test
+    void should_return_todo_when_get_by_id() throws Exception {
+        // Given
+        final TodoItem givenTodoItem = todoItemRepository.findAll().get(0);
+
+        // When
+        // Then
+        client.perform(MockMvcRequestBuilders.get("/todo-items/" + givenTodoItem.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(givenTodoItem.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value(givenTodoItem.getText()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.done").value(givenTodoItem.getDone()));
+    }
+
+    @Test
+    void should_throw_exception_when_get_by_id_given_not_exists() throws Exception {
+        // Given
+
+        // When
+        // Then
+        client.perform(MockMvcRequestBuilders.get("/todo-items/" + 12389))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 }

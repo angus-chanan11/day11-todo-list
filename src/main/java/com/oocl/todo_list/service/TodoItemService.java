@@ -19,6 +19,10 @@ public class TodoItemService {
         return todoItemRepository.findAll();
     }
 
+    public TodoItem findById(Integer id) {
+        return todoItemRepository.findById(id).orElseThrow(TodoItemNotFoundException::new);
+    }
+
     public TodoItem create(TodoItem todoItem) {
         return todoItemRepository.save(todoItem);
     }
