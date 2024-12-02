@@ -1,7 +1,7 @@
-package com.oocl.todoList.controller;
+package com.oocl.todo_list.controller;
 
-import com.oocl.todoList.model.TodoItem;
-import com.oocl.todoList.repository.TodoItemRepository;
+import com.oocl.todo_list.model.TodoItem;
+import com.oocl.todo_list.repository.TodoItemRepository;
 import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

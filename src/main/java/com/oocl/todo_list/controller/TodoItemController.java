@@ -1,7 +1,7 @@
-package com.oocl.todoList.controller;
+package com.oocl.todo_list.controller;
 
-import com.oocl.todoList.model.TodoItem;
-import com.oocl.todoList.service.TodoItemService;
+import com.oocl.todo_list.model.TodoItem;
+import com.oocl.todo_list.service.TodoItemService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

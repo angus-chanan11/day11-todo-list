@@ -1,4 +1,4 @@
-package com.oocl.todoList;
+package com.oocl.todo_list;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.oocl.todoList.model;
+package com.oocl.todo_list.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

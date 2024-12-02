@@ -1,7 +1,7 @@
-package com.oocl.todoList.service;
+package com.oocl.todo_list.service;
 
-import com.oocl.todoList.model.TodoItem;
-import com.oocl.todoList.repository.TodoItemRepository;
+import com.oocl.todo_list.model.TodoItem;
+import com.oocl.todo_list.repository.TodoItemRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
