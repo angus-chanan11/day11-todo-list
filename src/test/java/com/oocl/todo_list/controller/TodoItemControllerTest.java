@@ -2,6 +2,7 @@ package com.oocl.todo_list.controller;
 
 import com.oocl.todo_list.model.TodoItem;
 import com.oocl.todo_list.repository.TodoItemRepository;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -48,7 +50,7 @@ class TodoItemControllerTest {
 
         //when
         //then
-        final String jsonResponse = client.perform(MockMvcRequestBuilders.get("/todoItems"))
+        final String jsonResponse = client.perform(MockMvcRequestBuilders.get("/todo-items"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
