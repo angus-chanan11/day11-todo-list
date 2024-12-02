@@ -63,4 +63,33 @@ class TodoItemControllerTest {
                 )
                 .isEqualTo(givenTodos);
     }
+
+    @Test
+    void should_save_todo_success() throws Exception {
+        // Given
+        todoItemRepository.deleteAll();
+        String givenText = "new todo";
+        Boolean givenDone = false;
+        String givenTodo = String.format(
+                "{\"text\": \"%s\", \"done\": \"%s\"}",
+                givenText,
+                givenDone
+        );
+
+        // When
+        // Then
+        client.perform(MockMvcRequestBuilders.post("/todo-items")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(givenTodo)
+                )
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value(givenText))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.done").value(givenDone));
+        List<TodoItem> todoItems = todoItemRepository.findAll();
+        assertThat(todoItems).hasSize(1);
+        AssertionsForClassTypes.assertThat(todoItems.get(0).getId()).isNotNull();
+        AssertionsForClassTypes.assertThat(todoItems.get(0).getText()).isEqualTo(givenText);
+        AssertionsForClassTypes.assertThat(todoItems.get(0).getDone()).isEqualTo(givenDone);
+    }
 }

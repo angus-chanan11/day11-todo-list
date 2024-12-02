@@ -1,11 +1,14 @@
 package com.oocl.todo_list.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class TodoItem {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String text;
     private Boolean done;
@@ -14,6 +17,11 @@ public class TodoItem {
 
     public TodoItem(Integer id, String text, Boolean done) {
         this.id = id;
+        this.text = text;
+        this.done = done;
+    }
+
+    public TodoItem(String text, Boolean done) {
         this.text = text;
         this.done = done;
     }
