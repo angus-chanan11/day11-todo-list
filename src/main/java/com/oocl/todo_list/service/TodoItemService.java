@@ -28,7 +28,7 @@ public class TodoItemService {
     }
 
     public TodoItem update(Integer id, TodoItem todoItem) {
-        TodoItem existingTodoItem = todoItemRepository.findById(id).orElseThrow(TodoItemNotFoundException::new);
+        TodoItem existingTodoItem = findById(id);
 
         existingTodoItem.update(todoItem);
         return todoItemRepository.save(existingTodoItem);
