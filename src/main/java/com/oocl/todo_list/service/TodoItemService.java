@@ -29,4 +29,8 @@ public class TodoItemService {
         existingTodoItem.update(todoItem);
         return todoItemRepository.save(existingTodoItem);
     }
+
+    public void delete(Integer id) {
+        todoItemRepository.deleteById(id);
+    }
 }

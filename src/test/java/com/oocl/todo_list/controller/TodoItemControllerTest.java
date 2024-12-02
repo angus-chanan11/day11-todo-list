@@ -122,4 +122,16 @@ class TodoItemControllerTest {
         AssertionsForClassTypes.assertThat(todoItems.get(0).getText()).isEqualTo(givenText);
         AssertionsForClassTypes.assertThat(todoItems.get(0).getDone()).isEqualTo(givenDone);
     }
+
+    @Test
+    void should_remove_todo_success() throws Exception {
+        TodoItem existTodoId = todoItemRepository.findAll().get(0);
+        int givenId = existTodoId.getId();
+        // When
+        // Then
+        client.perform(MockMvcRequestBuilders.delete("/todo-items/" + givenId))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+        List<TodoItem> todoItems = todoItemRepository.findAll();
+        assertThat(todoItems).hasSize(2);
+    }
 }
